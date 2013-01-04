@@ -1,16 +1,16 @@
 {
-	"protocols":[
-		"http",
-		"https",
-		"ws"
-	],
+  "protocols":[
+    "http",
+    "https",
+    "ws"
+  ],
   "produces":[
-  	"application/json",
-  	"application/xml"
+    "application/json",
+    "application/xml"
   ],
   "consumes":[
-  	"application/json",
-  	"application/xml"
+    "application/json",
+    "application/xml"
   ],
   "swaggerVersion":"1.1",
   "apiVersion":"0.2",
@@ -22,7 +22,7 @@
       "description":"Operations about pets",
       "operations":[
         {
-        	"protocols":"https",
+          "protocols":"https",
           "httpMethod":"GET",
           "summary":"Find pet by ID",
           "notes":"Returns a pet based on ID",
