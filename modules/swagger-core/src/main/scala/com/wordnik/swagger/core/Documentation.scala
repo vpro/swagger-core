@@ -141,6 +141,10 @@ class DocumentationOperation(
   @BeanProperty var deprecated: java.lang.Boolean = null
   @BeanProperty var responseClass: String = _
   @BeanProperty var nickname: String = _
+  @BeanProperty var produces: java.util.List[String] = null
+  @BeanProperty var consumes: java.util.List[String] = null
+  @BeanProperty var protocols: java.util.List[String] = null
+  @BeanProperty var authentications: java.util.List[String] = null
 
   def this() = this(null, null, null)
 

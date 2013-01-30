@@ -58,8 +58,10 @@ trait ApiSpecParserTrait extends BaseApiParser {
   def parseHttpMethod(method: Method, apiOperation: ApiOperation): String
 
   def parse(): Documentation = {
-    if (apiEndpoint != null)
-      hostClass.getMethods.foreach(method => parseMethod(method))
+    Option(apiEndpoint) match {
+      case Some(ep) => hostClass.getMethods.foreach(method => parseMethod(method))
+      case _ =>
+    }
     documentation.apiVersion = apiVersion
     documentation.swaggerVersion = swaggerVersion
     documentation.basePath = basePath
@@ -84,6 +86,7 @@ trait ApiSpecParserTrait extends BaseApiParser {
     docParam.paramAccess = readString(apiParam.access)
   }
 
+  private val ListRegex: scala.util.matching.Regex = """List\[(.*?)\]""".r
   def parseMethod(method: Method): Any = {
     val apiOperation = method.getAnnotation(classOf[ApiOperation])
     val apiErrors = method.getAnnotation(classOf[ApiErrors])
@@ -100,11 +103,30 @@ trait ApiSpecParserTrait extends BaseApiParser {
       if (apiOperation != null) {
         docOperation.httpMethod = parseHttpMethod(method, apiOperation)
         docOperation.summary = readString(apiOperation.value)
+        docOperation.produces = Option(readString(apiOperation.produces)) match {
+          case Some(a) => a.split(",").toList
+          case None => null
+        }
+        docOperation.consumes = Option(readString(apiOperation.consumes)) match {
+          case Some(a) => a.split(",").toList
+          case None => null
+        }
+        docOperation.protocols = Option(readString(apiOperation.protocols)) match {
+          case Some(a) => a.split(",").toList
+          case None => null
+        }
+        docOperation.authentications = Option(readString(apiOperation.authentications)) match {
+          case Some(a) => a.split(",").toList
+          case None => null
+        }
+
         docOperation.notes = readString(apiOperation.notes)
         docOperation.setTags(toObjectList(apiOperation.tags))
         docOperation.nickname = method.getName
-        val apiResponseValue = readString(apiOperation.responseClass)
-        val isResponseMultiValue = apiOperation.multiValueResponse
+        val (apiResponseValue: String, isResponseMultiValue: Boolean) = ((responseClass: String, isMulti: Boolean) => responseClass match {
+          case ListRegex(respClass) => (respClass, true)
+          case _ => (responseClass, isMulti)
+        })(readString(apiOperation.responseClass), apiOperation.multiValueResponse)
 
         docOperation.setResponseTypeInternal(apiResponseValue)
         try {
