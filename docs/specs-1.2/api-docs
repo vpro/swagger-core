@@ -1,0 +1,34 @@
+{
+  "apiVersion": "0.3",
+  "swaggerVersion": "1.2",
+  "basePath": "http://petstore.swagger.wordnik.com/api",
+  "authorizations": {
+    "oauth2": {
+      "type": "oauth2",
+      "authorizationEndpoint": "/authorize",
+      "scopes": [
+        "PUBLIC",
+        "CREATE_BOOK",
+        "EDIT_BOOK",
+        "REMOVE_BOOK"
+      ],
+      "grantTypes": [
+        "IMPLICIT"
+      ]
+    },
+    "apiKey": {
+      "type": "api_key",
+      "authorizationEndpoint": "/account/authenticate/{username}"
+    }
+  },
+  "apis": [
+    {
+      "path": "/api-docs/user",
+      "description": ""
+    },
+    {
+      "path": "/api-docs/pet",
+      "description": ""
+    }
+  ]
+}

@@ -10,5 +10,6 @@ In the samples so far:
 
 2.0 Content-type declaration for `produces` and `consumes`
 
+3.0 Authorization (per [contribution](https://gist.github.com/7d481e6d509630127e6a))
 
 Samples will be used to describe the output, then rolled up into documentation on the wiki
