@@ -19,12 +19,15 @@
   "resourcePath": "/pet",
   "apis": [
     {
-      "path": "/pet.{format}/{petId}",
+      "path": "/pet/{petId}",
       "description": "Operations about pets",
       "operations": [
         {
           "protocols": [
             "https"
+          ],
+          "requiredAuthorizations": [
+            "oauth2"
           ],
           "httpMethod": "GET",
           "summary": "Find pet by ID",
@@ -55,7 +58,7 @@
       ]
     },
     {
-      "path": "/pet.{format}/findByStatus",
+      "path": "/pet/findByStatus",
       "description": "Operations about pets",
       "operations": [
         {
@@ -93,7 +96,7 @@
       ]
     },
     {
-      "path": "/pet.{format}/findByTags",
+      "path": "/pet/findByTags",
       "description": "Operations about pets",
       "operations": [
         {
