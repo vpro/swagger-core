@@ -206,6 +206,11 @@ class DocumentationOperation(
     cloned.responseTypeInternal = this.responseTypeInternal
     cloned.setTags(this.tags)
 
+    cloned.produces = this.produces
+    cloned.consumes = this.consumes
+    cloned.protocols = this.protocols
+    cloned.authentications = this.authentications
+
     parameters.foreach(p => cloned.addParameter((p.clone()).asInstanceOf[DocumentationParameter]))
     errorResponses.foreach(er => cloned.addErrorResponse((er.clone()).asInstanceOf[DocumentationError]))
     cloned
@@ -219,6 +224,11 @@ class DocumentationOperation(
     cloned.responseTypeInternal = this.responseTypeInternal
     cloned.setTags(this.tags)
     cloned.setErrorResponses(this.errorResponses)
+
+    cloned.produces = this.produces
+    cloned.consumes = this.consumes
+    cloned.protocols = this.protocols
+    cloned.authentications = this.authentications
 
     parameters.foreach(p => {
       if ("internal" != p.paramAccess) cloned.addParameter((p.clone()).asInstanceOf[DocumentationParameter])
