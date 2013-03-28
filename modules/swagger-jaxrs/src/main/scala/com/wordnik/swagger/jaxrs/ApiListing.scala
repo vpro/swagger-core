@@ -105,10 +105,12 @@ trait ApiListing {
           // nothing found, check produces type
           var hasMatch = false
           resource.getAnnotation(classOf[javax.ws.rs.Produces]).value.foreach(rt => {
-            if (resourceListingType.contains(rt)) {
-              logger.debug("matched " + rt)
-              hasMatch = true
-            } else logger.debug("no match on " + rt)
+            rt.split("; ").foreach(segment => {
+              if (resourceListingType.contains(segment)) {
+                logger.debug("matched " + segment)
+                hasMatch = true
+              } else logger.debug("no match on " + segment)
+            })
           })
           hasMatch
         }
