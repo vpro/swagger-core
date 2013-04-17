@@ -147,13 +147,13 @@
           <excludePackageNames>${javadoc.package.exclude}</excludePackageNames>
         </configuration>
         <executions>
-          <execution>
+          <!--execution>
             <id>attach-javadocs</id>
             <phase>verify</phase>
             <goals>
               <goal>jar</goal>
             </goals>
-          </execution>
+          </execution-->
         </executions>
       </plugin>
       <plugin>
