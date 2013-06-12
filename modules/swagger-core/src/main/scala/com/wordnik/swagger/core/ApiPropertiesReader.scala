@@ -32,7 +32,7 @@ import javax.xml.bind.annotation._
 import scala.collection.mutable.ListBuffer
 import scala.collection.JavaConversions._
 
-import sun.reflect.generics.reflectiveObjects.{ ParameterizedTypeImpl, TypeVariableImpl }
+import sun.reflect.generics.reflectiveObjects.{ ParameterizedTypeImpl, TypeVariableImpl, WildcardTypeImpl }
 
 import scala.collection.JavaConverters._
 
@@ -101,7 +101,9 @@ object ApiPropertiesReader {
       if (genericReturnType.getClass.isAssignableFrom(classOf[TypeVariableImpl[_]])) {
         genericReturnType.asInstanceOf[TypeVariableImpl[_]].getName
       }
-      else if (!genericReturnType.getClass.isAssignableFrom(classOf[ParameterizedTypeImpl])) {
+      else if (genericReturnType.getClass.isAssignableFrom(classOf[WildcardTypeImpl])) {
+        genericReturnType.asInstanceOf[WildcardTypeImpl].getUpperBounds()(0).asInstanceOf[TypeVariableImpl[_]].getName
+      } else if (!genericReturnType.getClass.isAssignableFrom(classOf[ParameterizedTypeImpl])) {
         readName(genericReturnType.asInstanceOf[Class[_]])
       } else {
         val parameterizedType = genericReturnType.asInstanceOf[java.lang.reflect.ParameterizedType]

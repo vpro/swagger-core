@@ -5,6 +5,11 @@ import com.wordnik.swagger.jaxrs._
 
 import javax.ws.rs._
 
+@Path("/api-docs")
+@Api("/api-docs")
+@Produces(Array("application/json", "application/xml"))
+class ApiListingResourcePlain extends ApiListing
+
 @Path("/api-docs.json")
 @Api("/api-docs")
 @Produces(Array("application/json"))

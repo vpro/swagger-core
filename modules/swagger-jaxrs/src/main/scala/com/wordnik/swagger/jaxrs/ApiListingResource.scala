@@ -20,6 +20,11 @@ import com.wordnik.swagger.annotations._
 
 import javax.ws.rs.{Produces, Path}
 
+@Path("/resources")
+@Api("/resources")
+@Produces(Array("application/json", "application/xml"))
+class ApiListingResourcePlain extends ApiListing
+
 @Path("/resources.json")
 @Api("/resources")
 @Produces(Array("application/json"))
